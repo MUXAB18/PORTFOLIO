@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-navy:        #1A1D29;
+  --color-navy-light:  #242837;
+  --color-teal:        #5EC9A8;
+  --color-teal-glow:   #76e6c4;
+  --color-warm:        #FF6B5E;
+  --color-amber:       #F4A94E;
+  --color-text-main:   #ffffff;
+  --color-text-muted:  #A0A4B8;
+
+  /* Semantic Theme Variables Mapping */
+  --color-background: var(--color-navy);
+  --color-foreground: var(--color-text-main);
+  
+  --font-sans:        'Poppins', sans-serif;
+  --font-script:      'Caveat', cursive;
+  
+  --color-border:     rgba(255, 255, 255, 0.08);
+  --color-border-teal:rgba(94, 201, 168, 0.18);
+  --color-ring:       var(--color-teal);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-navy);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Custom Selection ── */
+::selection {
+  background-color: var(--color-teal);
+  color: var(--color-navy);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-navy); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-teal);
+}
+
+/* ── Decorative Grid Patterns ── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dot-grid-teal {
+  background-image: radial-gradient(rgba(94, 201, 168, 0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.dot-grid-dense {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* ── Text Outline Utility ── */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-teal);
+}
+.text-stroke-white {
+  color: transparent;
+  -webkit-text-stroke: 2px #ffffff;
+}
+
+/* ── Component Styles ── */
+.glass-panel {
+  background: rgba(36, 40, 55, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+.timeline-line {
+  background: linear-gradient(to bottom, var(--color-teal) 0%, rgba(94,201,168,0) 100%);
+}
+
+.code-editor-window {
+  background: #11131a;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(150%) skewX(-20deg); }
+}
