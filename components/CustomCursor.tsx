@@ -1,18 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorState, setCursorState] = useState<"default" | "hover" | "project">("default");
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const smoothX = useSpring(cursorX, springConfig);
+  const smoothY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     // Only run on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -46,21 +53,43 @@ export default function CustomCursor() {
   }, []);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center mix-blend-difference"
-      animate={{
-        width: cursorState === "project" ? 140 : cursorState === "hover" ? 48 : 12,
-        height: cursorState === "project" ? 140 : cursorState === "hover" ? 48 : 12,
-        x: mousePosition.x - (cursorState === "project" ? 70 : cursorState === "hover" ? 24 : 6),
-        y: mousePosition.y - (cursorState === "project" ? 70 : cursorState === "hover" ? 24 : 6),
-      }}
-      transition={{ type: "tween", ease: "backOut", duration: 0.15 }}
-      style={{
-        backgroundColor: cursorState === "project" ? "#5EC9A8" : cursorState === "hover" ? "transparent" : "#5EC9A8",
-        border: cursorState === "hover" ? "1px solid #5EC9A8" : "none",
-        borderRadius: "50%",
-      }}
-    >
+    <>
+      {/* Subtle radial light that follows the cursor */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[0] hidden md:block"
+        style={{
+          width: 800,
+          height: 800,
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+          background: "radial-gradient(circle, rgba(94, 201, 168, 0.05) 0%, transparent 60%)",
+        }}
+      />
+
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center mix-blend-difference"
+        style={{
+          x: smoothX,
+          y: smoothY,
+        }}
+        animate={{
+          width: cursorState === "project" ? 140 : cursorState === "hover" ? 48 : 12,
+          height: cursorState === "project" ? 140 : cursorState === "hover" ? 48 : 12,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <motion.div
+          className="absolute inset-0 rounded-full"
+          animate={{
+            backgroundColor: cursorState === "project" ? "#5EC9A8" : cursorState === "hover" ? "transparent" : "#5EC9A8",
+            border: cursorState === "hover" ? "1px solid #5EC9A8" : "0px solid transparent",
+          }}
+          transition={{ duration: 0.2 }}
+        />
       <AnimatePresence>
         {cursorState === "project" && (
           <motion.span
@@ -73,6 +102,7 @@ export default function CustomCursor() {
           </motion.span>
         )}
       </AnimatePresence>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }

@@ -43,11 +43,11 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   // Smooth spring physics for rotation
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  
+
   // Map mouse position to rotation values (max 15 degrees)
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
@@ -59,7 +59,7 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
     const height = rect.height;
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
-    
+
     // Convert to normalized coordinates (-0.5 to 0.5)
     x.set(mouseX / width - 0.5);
     y.set(mouseY / height - 0.5);
@@ -83,15 +83,15 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{ 
-          rotateX, 
-          rotateY, 
-          transformStyle: "preserve-3d" 
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d"
         }}
         className="flex flex-col h-full bg-[#242837] border border-white/5 p-8 rounded-3xl shadow-xl group hover:border-teal/30 transition-colors duration-300 relative cursor-crosshair overflow-hidden"
       >
         {/* Animated Glow on Hover */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
             background: "radial-gradient(circle at center, rgba(94,201,168,0.1) 0%, transparent 70%)",
@@ -101,7 +101,7 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
 
         {/* Floating Content (translateZ pushes it out in 3D space) */}
         <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="flex flex-col h-full relative z-10">
-          
+
           {/* Title & Percentage */}
           <div className="flex justify-between items-end mb-6">
             <h3 className="font-sans font-black text-2xl text-white tracking-wide">{skill.title}</h3>
@@ -133,7 +133,7 @@ export default function ProfessionalSkills() {
   return (
     <section id="skills" className="py-24 px-6 md:px-16 lg:px-24 bg-[#1E2330] relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Header Section */}
         <div className="flex flex-col items-center mb-24 text-center">
           <motion.h2

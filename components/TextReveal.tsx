@@ -44,7 +44,7 @@ export default function TextReveal({ text, className = "", delay = 0 }: TextReve
 
   return (
     <motion.div
-      style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", perspective: "1000px" }}
+      style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", perspective: "1000px", paddingRight: "0.1em", paddingBottom: "0.2em", margin: "-0.2em -0.1em 0 0" }}
       variants={container}
       initial="hidden"
       whileInView="visible"

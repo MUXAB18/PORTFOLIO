@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Caveat } from "next/font/google";
 
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
@@ -42,10 +43,18 @@ const TIMELINE_DATA = [
 ];
 
 export default function Timeline() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section id="experience" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-navy relative">
+    <section id="experience" ref={containerRef} className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-navy relative">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
-        
+
         {/* Left Side: Sticky Header */}
         <div className="w-full lg:w-1/3 relative">
           <div className="lg:sticky lg:top-32 lg:h-[calc(100vh-200px)] flex flex-col">
@@ -60,8 +69,8 @@ export default function Timeline() {
               </span>
               <h2 className="font-sans font-black text-5xl sm:text-6xl md:text-7xl lg:text-7xl text-white leading-[1] tracking-tighter mb-6 word-break-keep-all">
                 EXPERIENCE
-                <span 
-                  className="text-transparent block mt-2" 
+                <span
+                  className="text-transparent block mt-2"
                   style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}
                 >
                   & EDUCATION
@@ -70,7 +79,7 @@ export default function Timeline() {
               <p className="font-sans text-white/50 text-base max-w-sm leading-relaxed mb-8">
                 A continuous journey of learning and building. From academic foundations at Superior University to architecting scalable systems in production environments.
               </p>
-              
+
               <div className="w-16 h-1 bg-teal/30 rounded-full"></div>
             </motion.div>
           </div>
@@ -78,12 +87,18 @@ export default function Timeline() {
 
         {/* Right Side: Timeline Content */}
         <div className="w-full lg:w-2/3 relative">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-[7px] md:left-[15px] top-4 bottom-0 w-[2px] bg-gradient-to-b from-teal/50 via-teal/10 to-transparent"></div>
+          {/* Vertical Timeline Line Background */}
+          <div className="absolute left-[7px] md:left-[15px] top-4 bottom-0 w-[2px] bg-white/5"></div>
+
+          {/* Animated Glowing Progress Line */}
+          <motion.div
+            className="absolute left-[7px] md:left-[15px] top-4 w-[2px] bg-gradient-to-b from-teal to-teal/30 z-0 origin-top shadow-[0_0_15px_rgba(94,201,168,0.8)]"
+            style={{ height: lineHeight }}
+          />
 
           <div className="flex flex-col gap-12 md:gap-16">
             {TIMELINE_DATA.map((exp, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +111,7 @@ export default function Timeline() {
 
                 {/* Content Card */}
                 <div className="glass-panel p-6 sm:p-8 md:p-10 rounded-3xl hover:border-teal/30 hover:bg-white/[0.03] transition-all duration-500 hover:-translate-y-1">
-                  
+
                   {/* Header Row */}
                   <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-6 border-b border-white/5 pb-6">
                     <div>
@@ -135,7 +150,7 @@ export default function Timeline() {
             ))}
           </div>
         </div>
-        
+
       </div>
     </section>
   );

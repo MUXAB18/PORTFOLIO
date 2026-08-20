@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -55,6 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.variable} ${caveat.variable} font-sans antialiased bg-[#1A1D29] text-white overflow-x-hidden selection:bg-[#5EC9A8] selection:text-[#1A1D29]`}>
+
         <CustomCursor />
         <Navbar />
         {children}

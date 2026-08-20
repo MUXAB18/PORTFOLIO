@@ -13,6 +13,9 @@ import TechStack3D from "@/components/TechStack3D";
 import CodeShowcase from "@/components/CodeShowcase";
 import DesignToCode from "@/components/DesignToCode";
 import TextReveal from "@/components/TextReveal";
+import IntroSequence from "@/components/IntroSequence";
+import TextMarquee from "@/components/TextMarquee";
+import DevActivity from "@/components/DevActivity";
 
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
@@ -41,8 +44,20 @@ export default function Home() {
   // Parallax calculations
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
+  const [introFinished, setIntroFinished] = useState(false);
+
   return (
-    <main className="min-h-screen bg-navy selection:bg-teal selection:text-navy overflow-hidden">
+    <main className="min-h-screen bg-navy selection:bg-teal selection:text-navy overflow-hidden relative">
+      <IntroSequence onComplete={() => setIntroFinished(true)} />
+
+      {/* Global Noise Background */}
+      <div className="noise-bg mix-blend-overlay"></div>
+
+      {/* Global Scroll Progress */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-teal origin-left z-50 mix-blend-difference"
+        style={{ scaleX: scrollYProgress }}
+      />
 
       {/* ── HERO SECTION ── */}
       <section className="relative min-h-screen flex items-center px-6 md:px-16 lg:px-24 pt-28 pb-10">
@@ -66,22 +81,26 @@ export default function Home() {
             </motion.div>
 
             <div className="flex flex-col mb-6">
-              <motion.h1
-                initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                className="font-sans font-black text-[13vw] sm:text-[10vw] md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter text-teal"
-              >
-                MUSAB
-              </motion.h1>
-              <motion.h1
-                initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                className="font-sans font-black text-[13vw] sm:text-[10vw] md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter text-white"
-              >
-                IFTIKHAR
-              </motion.h1>
+              <div className="overflow-hidden">
+                <motion.h1
+                  initial={{ opacity: 0, y: 100, filter: "blur(10px)" }}
+                  animate={introFinished ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+                  transition={{ duration: 1, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
+                  className="font-sans font-black text-[13vw] sm:text-[10vw] md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter text-teal origin-bottom pr-6"
+                >
+                  MUSAB
+                </motion.h1>
+              </div>
+              <div className="overflow-hidden">
+                <motion.h1
+                  initial={{ opacity: 0, y: 100, filter: "blur(10px)" }}
+                  animate={introFinished ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+                  transition={{ duration: 1, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
+                  className="font-sans font-black text-[13vw] sm:text-[10vw] md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter text-white origin-bottom pr-6"
+                >
+                  IFTIKHAR
+                </motion.h1>
+              </div>
             </div>
 
             <motion.div
@@ -157,7 +176,7 @@ export default function Home() {
                 <span className="relative z-10">EXPLORE MY WORK</span>
                 <div className="relative z-10 ml-4 w-6 h-6 rounded-full bg-teal flex items-center justify-center text-navy font-black">↓</div>
               </a>
-              
+
               <a href="/resume.pdf" download="Musab_Iftikhar_Resume.pdf" className="group relative inline-flex items-center justify-center px-8 py-4 font-sans font-bold text-[10px] md:text-xs tracking-widest uppercase text-teal bg-transparent border border-teal/30 rounded-full overflow-hidden transition-all duration-300 hover:bg-teal hover:text-navy hover:border-teal">
                 <span className="relative z-10 flex items-center gap-2">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -240,19 +259,29 @@ export default function Home() {
         >
           <div className="flex flex-col items-center justify-center space-y-4">
             <TextReveal
-              text="I DON'T JUST WRITE CODE."
-              className="font-sans font-black text-4xl md:text-7xl lg:text-8xl leading-none text-white/20 justify-center text-center"
+              text="I BUILD DIGITAL EXPERIENCES"
+              className="font-sans font-black text-3xl md:text-5xl lg:text-7xl leading-none text-white/20 justify-center text-center"
             />
-            <div className="flex flex-wrap justify-center items-center gap-x-4 md:gap-x-6">
+            <TextReveal
+              text="THAT COMBINE"
+              className="font-sans font-black text-3xl md:text-5xl lg:text-7xl leading-none text-white/20 justify-center text-center"
+              delay={3}
+            />
+            <div className="flex flex-wrap justify-center items-center gap-x-4 md:gap-x-6 mt-4">
               <TextReveal
-                text="I BUILD"
-                className="font-sans font-black text-4xl md:text-7xl lg:text-8xl leading-none text-white justify-center"
-                delay={4}
+                text="DESIGN +"
+                className="font-sans font-black text-4xl md:text-6xl lg:text-8xl leading-none text-white justify-center"
+                delay={5}
               />
               <TextReveal
-                text="EXPERIENCES."
-                className="font-sans font-black text-4xl md:text-7xl lg:text-8xl leading-none text-teal justify-center"
-                delay={6}
+                text="CODE +"
+                className="font-sans font-black text-4xl md:text-6xl lg:text-8xl leading-none text-white justify-center"
+                delay={7}
+              />
+              <TextReveal
+                text="PERFORMANCE."
+                className="font-sans font-black text-4xl md:text-6xl lg:text-8xl leading-none text-teal justify-center"
+                delay={9}
               />
             </div>
           </div>
@@ -274,6 +303,9 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* 02.5 - MARQUEE */}
+      <TextMarquee />
+
       {/* 03 - PORTFOLIO SECTION */}
       <PortfolioSection />
 
@@ -286,8 +318,14 @@ export default function Home() {
       {/* 05 - UNDER THE HOOD */}
       <CodeShowcase />
 
+      {/* 05.5 - THE LAB */}
+
+
       {/* 06 - EXPERIENCE TIMELINE */}
       <Timeline />
+
+      {/* 06.5 - DEV ACTIVITY */}
+      <DevActivity />
 
       {/* 07 - DESIGN TO CODE */}
       <DesignToCode />

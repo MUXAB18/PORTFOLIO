@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const TECH_STACK = [
-  "React", "Next.js", "TypeScript", "JavaScript", "Node.js", 
+  "React", "Next.js", "TypeScript", "JavaScript", "Node.js",
   "TailwindCSS", "Framer Motion", "GSAP", "PostgreSQL", "MongoDB",
-  "Prisma", "Express", "Docker", "AWS", "Vercel", "Git", "GitHub", 
+  "Prisma", "Express", "Docker", "AWS", "Vercel", "Git", "GitHub",
   "GraphQL", "REST APIs", "Redux", "Zustand", "TRPC", "Figma", "HTML5", "CSS3"
 ];
 
@@ -21,12 +21,12 @@ export default function TechStack3D() {
     // Generate initial sphere points using Fibonacci sphere algorithm
     const N = TECH_STACK.length;
     // Dynamic radius based on screen size to prevent mobile overflow
-    const r = window.innerWidth < 768 ? 140 : 200; 
-    
+    const r = window.innerWidth < 768 ? 140 : 200;
+
     const initialItems = TECH_STACK.map((tech, i) => {
       const phi = Math.acos(-1 + (2 * i) / N);
       const theta = Math.sqrt(N * Math.PI) * phi;
-      
+
       return {
         text: tech,
         x: r * Math.cos(theta) * Math.sin(phi),
@@ -50,12 +50,12 @@ export default function TechStack3D() {
       const sy = Math.sin(rotationRef.current.y);
       const cy = Math.cos(rotationRef.current.y);
 
-      setItems((prev) => 
+      setItems((prev) =>
         prev.map((item) => {
           // Rotate around X axis
           const y1 = item.origY * cx - item.origZ * sx;
           const z1 = item.origY * sx + item.origZ * cx;
-          
+
           // Rotate around Y axis
           const x2 = item.origX * cy + z1 * sy;
           const z2 = -item.origX * sy + z1 * cy;
@@ -80,7 +80,7 @@ export default function TechStack3D() {
     // Calculate mouse position relative to center of container (-1 to 1)
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-    
+
     // Smoothly update rotation speed based on mouse position
     mouseRef.current = {
       x: x * 0.02, // max rotation speed
@@ -95,10 +95,10 @@ export default function TechStack3D() {
 
   return (
     <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-navy relative overflow-hidden flex flex-col lg:flex-row items-center justify-between">
-      
+
       {/* Background Decor */}
       <div className="absolute inset-0 dot-grid-teal opacity-5 mix-blend-screen pointer-events-none"></div>
-      
+
       {/* Text Content Side */}
       <div className="w-full lg:w-1/2 relative z-10 mb-24 lg:mb-0 text-center lg:text-left flex flex-col items-center lg:items-start">
         <motion.div
@@ -116,18 +116,18 @@ export default function TechStack3D() {
           <p className="font-sans text-base md:text-lg text-white/60 max-w-md leading-relaxed">
             I continuously evolve my technical ecosystem. From modern frontend frameworks to scalable backend architectures, I leverage the best tools to build world-class digital experiences.
           </p>
-          
+
           <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-3">
-             <span className="px-4 py-2 rounded-full border border-teal/30 text-teal text-[10px] md:text-xs font-bold tracking-widest uppercase bg-teal/5">Frontend</span>
-             <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Backend</span>
-             <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Cloud & DevOps</span>
+            <span className="px-4 py-2 rounded-full border border-teal/30 text-teal text-[10px] md:text-xs font-bold tracking-widest uppercase bg-teal/5">Frontend</span>
+            <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Backend</span>
+            <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Cloud & DevOps</span>
           </div>
         </motion.div>
       </div>
 
       {/* 3D Sphere Side */}
       <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative z-10 perspective-1000 mt-10 md:mt-0">
-        <motion.div 
+        <motion.div
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
