@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
 import { Caveat } from "next/font/google";
 import { Mail } from "lucide-react";
@@ -22,26 +22,43 @@ import Stats from "@/components/Stats";
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { damping: 50, stiffness: 400 });
+  const smoothMouseY = useSpring(mouseY, { damping: 50, stiffness: 400 });
 
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, 100]);
 
-  // Handle Parallax Mouse Movement
+  // Handle Parallax Mouse Movement efficiently without React re-renders
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      setMousePosition({ x, y });
+      mouseX.set(x);
+      mouseY.set(y);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
+
+  // Derived motion values for specific layers
+  const blobX = useTransform(smoothMouseX, (v) => v * -1);
+  const blobY = useTransform(smoothMouseY, (v) => v * -1);
+  
+  const outlineX = useTransform(smoothMouseX, (v) => v * 0.5);
+  const outlineY = useTransform(smoothMouseY, (v) => v * 0.5);
+  
+  const pill1X = useTransform(smoothMouseX, (v) => v * 1.5);
+  const pill1Y = useTransform(smoothMouseY, (v) => v * 1.5);
+  
+  const pill2X = useTransform(smoothMouseX, (v) => v * -1.5);
+  const pill2Y = useTransform(smoothMouseY, (v) => v * -1.5);
 
   // Parallax calculations
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -65,7 +82,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center px-6 md:px-16 lg:px-24 pt-28 pb-10">
         {/* Parallax Background Grid */}
         <motion.div
-          className="absolute inset-0 dot-grid opacity-30 pointer-events-none mix-blend-screen"
+          className="absolute inset-0 dot-grid opacity-30 pointer-events-none"
           style={{ y: y1 }}
         ></motion.div>
 
@@ -195,7 +212,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              style={{ x: mousePosition.x * -1, y: mousePosition.y * -1 }}
+              style={{ x: blobX, y: blobY }}
               className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] bg-teal/5 rounded-full blur-2xl"
             ></motion.div>
 
@@ -204,7 +221,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8, rotate: -45 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-              style={{ x: mousePosition.x * 0.5, y: mousePosition.y * 0.5 }}
+              style={{ x: outlineX, y: outlineY }}
               className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[450px] lg:h-[450px] rounded-full border border-teal/20"
             ></motion.div>
 
@@ -213,7 +230,7 @@ export default function Home() {
               initial={{ opacity: 0, x: 50, y: 50 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8, type: "spring" }}
-              style={{ x: mousePosition.x * 1.5, y: mousePosition.y * 1.5 }}
+              style={{ x: pill1X, y: pill1Y }}
               className="absolute top-[10%] right-0 md:-right-10 z-20 bg-navy-light border border-white/5 rounded-xl px-6 py-4 shadow-2xl flex flex-col items-center"
             >
               <span className="font-sans font-black text-2xl text-white">1+</span>
@@ -224,7 +241,7 @@ export default function Home() {
               initial={{ opacity: 0, x: -50, y: -50 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.8, delay: 1, type: "spring" }}
-              style={{ x: mousePosition.x * -1.5, y: mousePosition.y * -1.5 }}
+              style={{ x: pill2X, y: pill2Y }}
               className="absolute bottom-[20%] left-0 md:-left-10 z-20 bg-navy-light border border-white/5 rounded-xl px-6 py-4 shadow-2xl flex flex-col items-center"
             >
               <span className="font-sans font-black text-2xl text-white">10+</span>

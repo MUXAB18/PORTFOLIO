@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Send, Mail, User, MessageSquare } from "lucide-react";
+import { ArrowLeft, Send, Mail, User, MessageSquare, Phone } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -127,6 +127,14 @@ export default function ContactPage() {
                       <Mail size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-teal transition-colors" />
                       <input name="email" required type="email" placeholder="john@example.com" className="w-full bg-white/[0.03] border border-white/5 focus:border-teal/50 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-white/20 outline-none transition-all focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(94,201,168,0.1)]" />
                     </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="font-sans text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/50 pl-1">Phone <span className="text-white/30 font-normal lowercase tracking-normal">(optional)</span></label>
+                  <div className="relative group">
+                    <Phone size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-teal transition-colors" />
+                    <input name="phone" type="tel" placeholder="+1 (555) 000-0000" className="w-full bg-white/[0.03] border border-white/5 focus:border-teal/50 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-white/20 outline-none transition-all focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(94,201,168,0.1)]" />
                   </div>
                 </div>
 
