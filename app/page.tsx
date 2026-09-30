@@ -310,7 +310,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="mt-12 absolute right-0 bottom-0 md:right-24 md:bottom-12 rotate-[-10deg]"
+            className="mt-12 absolute right-0 bottom-32 md:right-24 md:bottom-32 rotate-[-10deg]"
           >
             <span className={`${caveat.className} text-2xl md:text-4xl text-amber`}>
               "details matter."
@@ -320,6 +320,11 @@ export default function Home() {
             </svg>
           </motion.div>
         </motion.div>
+
+        {/* Stats placed perfectly after the description */}
+        <div className="relative z-10 mt-24 md:mt-32">
+          <Stats />
+        </div>
       </section>
 
       {/* 02.5 - MARQUEE */}
@@ -337,9 +342,9 @@ export default function Home() {
       {/* 05 - UNDER THE HOOD */}
       <CodeShowcase />
 
-      {/* 05.5 - THE LAB / PROCESS & STATS */}
+      {/* 05.5 - THE LAB / PROCESS */}
       <ProcessSection />
-      <Stats />      {/* 06 - EXPERIENCE TIMELINE */}
+      {/* 06 - EXPERIENCE TIMELINE */}
       <Timeline />
 
       {/* 06.5 - DEV ACTIVITY */}
