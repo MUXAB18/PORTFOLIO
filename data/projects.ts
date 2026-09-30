@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "TradeMatch Mobile App",
     category: "MOBILE APP",
     image: "",
-    mobileImages: ["/tradematch-mobile-1.png", "/tradematch-mobile-2.png"],
+    mobileImages: ["/tradematch-mobile-1.PNG", "/tradematch-mobile-2.PNG"],
     description: "A cross-platform mobile application for skilled trades built with React Native and Firebase, featuring seamless profile management and real-time job matching.",
     tags: "REACT NATIVE, FIREBASE, MOBILE",
     bgColor: "bg-[#0088ff]/20"
