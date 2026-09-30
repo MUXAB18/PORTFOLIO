@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function Contact() {
   return (
@@ -50,18 +51,21 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <motion.a
-            href="mailto:musabiftikhar44@gmail.com"
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center justify-center px-12 py-6 font-sans font-bold text-xl tracking-widest uppercase text-navy bg-teal rounded-full overflow-hidden transition-transform shadow-[0_0_40px_rgba(94,201,168,0.4)] hover:shadow-[0_0_60px_rgba(94,201,168,0.6)]"
           >
-            <span className="relative z-10 flex items-center gap-3">
-              LET'S TALK
-              <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 text-2xl leading-none">↗</span>
-            </span>
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-          </motion.a>
+            <Link
+              href="/contact"
+              className="group relative inline-flex items-center justify-center px-12 py-6 font-sans font-bold text-xl tracking-widest uppercase text-navy bg-teal rounded-full overflow-hidden transition-transform shadow-[0_0_40px_rgba(94,201,168,0.4)] hover:shadow-[0_0_60px_rgba(94,201,168,0.6)]"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                LET'S TALK
+                <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 text-2xl leading-none">↗</span>
+              </span>
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            </Link>
+          </motion.div>
         </motion.div>
 
         <motion.div
