@@ -33,7 +33,7 @@ export default function Navbar() {
         className={`fixed left-0 right-0 z-50 pointer-events-none transition-all duration-500 flex justify-center ${isScrolled ? 'top-4 px-4 md:px-8' : 'top-0 px-6 md:px-16 lg:px-24 py-8'}`}
       >
         <div className={`max-w-7xl w-full flex items-center justify-between relative transition-all duration-500 ${isScrolled ? 'bg-[#1A1D29]/80 backdrop-blur-lg border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.4)] rounded-2xl py-3 px-6 md:px-8' : ''}`}>
-          <a href="#top" className="pointer-events-auto flex items-center -ml-5" aria-label="Home">
+          <a href="#top" className={`pointer-events-auto flex items-center -ml-5 transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`} aria-label="Home">
             <Image
               src="/logo.png"
               alt="Musab Logo"
@@ -122,7 +122,7 @@ export default function Navbar() {
               animate={{ x: 0, borderTopLeftRadius: "0%", borderBottomLeftRadius: "0%" }}
               exit={{ x: "100%", borderTopLeftRadius: "100%", borderBottomLeftRadius: "100%" }}
               transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-              className="relative w-[85%] max-w-sm h-full bg-[#1A1D29] border-l border-white/10 shadow-[-20px_0_40px_rgba(0,0,0,0.4)] flex flex-col justify-center px-10"
+              className="relative w-[85%] max-w-sm h-full bg-[#1A1D29] border-l border-white/10 shadow-[-20px_0_40px_rgba(0,0,0,0.4)] flex flex-col justify-center px-6 min-[400px]:px-10"
             >
               {/* Background glow inside the menu */}
               <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none">
@@ -144,14 +144,16 @@ export default function Navbar() {
                       animate={{ y: 0, opacity: 1, rotate: 0 }}
                       exit={{ y: 80, opacity: 0, transition: { duration: 0.3 } }}
                       transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.33, 1, 0.68, 1] }}
-                      className="flex flex-col group"
+                      className="flex flex-col group relative overflow-hidden"
                     >
-                      <span className="font-sans font-bold text-xs tracking-[0.2em] text-teal/60 mb-1">
+                      <span className="font-sans font-bold text-[10px] tracking-[0.3em] text-teal/60 mb-0.5 group-hover:text-teal transition-colors duration-300">
                         0{i + 1}
                       </span>
-                      <span className="font-sans font-black text-5xl text-white">
+                      <span className="font-sans font-black text-4xl min-[400px]:text-5xl text-white/80 tracking-tight group-hover:text-white transition-colors duration-300">
                         {sec.label}
                       </span>
+                      {/* Hover underline effect */}
+                      <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-teal to-transparent group-hover:w-full transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" />
                     </motion.a>
                   </div>
                 ))}
@@ -166,7 +168,7 @@ export default function Navbar() {
               >
                 <a href="#contact" onClick={() => setIsOpen(false)} className="text-white font-sans font-bold text-xl flex items-center justify-between group">
                   Let's Talk
-                  <span className="w-8 h-8 rounded-full bg-teal flex items-center justify-center text-navy text-sm group-hover:scale-110 transition-transform">
+                  <span className="w-10 h-10 rounded-full bg-teal flex items-center justify-center text-navy text-sm group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(94,201,168,0.5)] transition-all duration-300">
                     →
                   </span>
                 </a>

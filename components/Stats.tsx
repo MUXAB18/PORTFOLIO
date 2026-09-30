@@ -54,10 +54,19 @@ export default function Stats() {
         className="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-amber/5 blur-3xl pointer-events-none"
       />
 
-      <div className="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-        <BigCounter end={3} suffix="+" label="Years Experience" />
-        <BigCounter end={40} suffix="+" label="Projects Built" />
-        <BigCounter end={99} suffix="" label="Performance Score" />
+      <div className="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
+        <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-10 backdrop-blur-md flex justify-center shadow-[0_0_40px_rgba(0,0,0,0.2)] hover:bg-white/[0.04] transition-colors duration-500 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <BigCounter end={1} suffix="+" label="Years Experience" />
+        </div>
+        <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-10 backdrop-blur-md flex justify-center shadow-[0_0_40px_rgba(0,0,0,0.2)] hover:bg-white/[0.04] transition-colors duration-500 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <BigCounter end={10} suffix="+" label="Projects Built" />
+        </div>
+        <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-10 backdrop-blur-md flex justify-center shadow-[0_0_40px_rgba(0,0,0,0.2)] hover:bg-white/[0.04] transition-colors duration-500 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <BigCounter end={99} suffix="" label="Performance Score" />
+        </div>
       </div>
     </section>
   );

@@ -85,7 +85,7 @@ export default function ProcessSection() {
             MY PROCESS
           </motion.span>
           
-          <h2 className="font-sans font-black text-5xl md:text-7xl text-white leading-[0.9] tracking-tighter mb-8 flex flex-col">
+          <h2 className="font-sans font-black text-5xl md:text-7xl text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 flex flex-col gap-1 md:gap-0">
             <div className="overflow-hidden">
               <motion.div
                 initial={{ y: "100%" }}
@@ -133,14 +133,11 @@ export default function ProcessSection() {
                 onMouseEnter={() => setActiveStep(i)}
                 onClick={() => setActiveStep(i)}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className={`group relative flex flex-col justify-center overflow-hidden rounded-2xl cursor-pointer border-l-4 transition-colors duration-500 ${
+                className={`group relative flex flex-col justify-center overflow-hidden rounded-2xl cursor-pointer border transition-colors duration-500 ${
                   isActive 
-                    ? "bg-[#1a1f2e] border-teal" 
-                    : "bg-transparent border-white/5 hover:bg-white/[0.02]"
+                    ? "bg-white/[0.02] border-teal/30 shadow-[0_0_30px_rgba(94,201,168,0.1)]" 
+                    : "bg-transparent border-white/5 hover:bg-white/[0.02] hover:border-white/10"
                 }`}
-                style={{
-                  height: isActive ? "auto" : "80px",
-                }}
               >
                 {/* Active Background Glow */}
                 {isActive && (
@@ -153,9 +150,9 @@ export default function ProcessSection() {
                   />
                 )}
 
-                <div className="relative z-10 flex flex-col w-full h-full p-6 md:px-10">
+                <div className="relative z-10 flex flex-col w-full h-full p-5 md:p-6 lg:px-10">
                   {/* Always Visible Row: Number + Title */}
-                  <motion.div layout className="flex items-center gap-6 md:gap-12 w-full h-[32px]">
+                  <motion.div layout className="flex items-center gap-4 md:gap-8 w-full">
                     <span className={`font-sans font-black text-xl md:text-2xl transition-colors duration-500 ${
                       isActive ? "text-teal" : "text-white/20 group-hover:text-white/40"
                     }`}>

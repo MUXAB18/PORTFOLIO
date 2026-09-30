@@ -1,31 +1,83 @@
-export const projects = [
+export interface Project {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  link?: string;
+  mobileImages?: string[];
+  description: string;
+  tags: string;
+  bgColor: string;
+}
+
+export const projects: Project[] = [
   {
-    title: "Enterprise E-commerce Platform",
-    description: "A high-performance B2B e-commerce solution processing high-volume transactions with real-time inventory sync.",
-    role: "Full Stack Lead",
-    architecture: "Next.js 14 App Router, Node.js microservices, PostgreSQL, Redis for cart caching.",
-    challenge: "Optimized complex SQL queries to reduce product catalog search latency from 2.4s to under 150ms.",
-    tech: ["Next.js", "Node.js", "PostgreSQL", "Redis", "Tailwind CSS"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/MUXAB18/project"
+    id: "tradematch",
+    title: "Trade Match",
+    category: "WEB APP",
+    image: "/tradematch.png",
+    link: "https://tradematch-pi.vercel.app/en",
+    description: "The AI-Assisted Job Copilot for Skilled Trades. Build a professional profile, track certifications, and get matched with real jobs.",
+    tags: "NEXT.JS, TAILWINDCSS, AI",
+    bgColor: "bg-[#0b5cff]/20"
   },
   {
-    title: "Financial Analytics Dashboard",
-    description: "Real-time data visualization platform for financial analysts to track market trends and portfolio performance.",
-    role: "Frontend Architect",
-    architecture: "React, WebSockets for live data feeds, optimized Canvas API for rendering thousands of data points.",
-    challenge: "Prevented React re-render cascades during high-frequency WebSocket updates using strict memoization and refs.",
-    tech: ["React", "TypeScript", "WebSockets", "Canvas API", "Framer Motion"],
-    liveUrl: "https://example.com"
+    id: "tradematch-mobile",
+    title: "TradeMatch Mobile App",
+    category: "MOBILE APP",
+    image: "",
+    mobileImages: ["/tradematch-mobile-1.png", "/tradematch-mobile-2.png"],
+    description: "A cross-platform mobile application for skilled trades built with React Native and Firebase, featuring seamless profile management and real-time job matching.",
+    tags: "REACT NATIVE, FIREBASE, MOBILE",
+    bgColor: "bg-[#0088ff]/20"
   },
   {
-    title: "Multi-tenant SaaS CRM",
-    description: "A customer relationship management tool built specifically for small healthcare practices with HIPAA compliance in mind.",
-    role: "Full Stack Developer",
-    architecture: "Next.js Server Actions, AWS RDS (PostgreSQL) with Row-Level Security, AWS S3 for secure document storage.",
-    challenge: "Implemented strict multi-tenant data isolation at the database level using PostgreSQL Row-Level Security (RLS) policies.",
-    tech: ["Next.js", "PostgreSQL", "AWS", "Prisma", "Shadcn UI"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/MUXAB18/crm"
+    id: "webifypro",
+    title: "Webify Pro",
+    category: "CORPORATE",
+    image: "/webifypro-new.png",
+    link: "https://www.webifypro.live/",
+    description: "Elevate your brand with high-performance web development and strategic digital marketing.",
+    tags: "NEXT.JS, TAILWINDCSS, FRAMER MOTION",
+    bgColor: "bg-[#1d4ed8]/20"
+  },
+  {
+    id: "rasheed",
+    title: "Rasheed Clothing Intl",
+    category: "E-COMMERCE",
+    image: "/rasheed-clothing.png",
+    link: "https://www.rasheedclothingintl.me/",
+    description: "A high-performance modern e-commerce platform built for a premium clothing brand, featuring seamless checkout and dynamic inventory management.",
+    tags: "NEXT.JS, TAILWIND, E-COMMERCE",
+    bgColor: "bg-[#7c8f9c]/20"
+  },
+  {
+    id: "learnhub",
+    title: "LearnHub",
+    category: "ED-TECH",
+    image: "/learnhub.png",
+    link: "https://lms-techub.vercel.app/",
+    description: "An interactive online learning platform allowing users to access world-class courses, build real skills, and earn certificates at their own pace.",
+    tags: "REACT, ED-TECH",
+    bgColor: "bg-[#7161ef]/20"
+  },
+  {
+    id: "medifind",
+    title: "MediFind",
+    category: "HEALTHCARE",
+    image: "/medifind.png",
+    description: "A comprehensive healthcare platform connecting patients with top-rated doctors. Built with the MERN stack for seamless appointment booking and symptom-based specialist matching.",
+    tags: "MERN STACK, HEALTHCARE",
+    bgColor: "bg-[#00a884]/20"
+  },
+  {
+    id: "focusflow",
+    title: "FocusFlow",
+    category: "MOBILE APP",
+    image: "",
+    mobileImages: ["/focusflow-1.jpg", "/focusflow-2.jpg"],
+    description: "A productivity and habit tracking mobile app built with Flutter and Firebase, helping users stay focused, track tasks, and achieve their daily goals.",
+    tags: "FLUTTER, FIREBASE, MOBILE",
+    bgColor: "bg-[#ff4f5a]/20"
   }
 ];

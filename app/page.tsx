@@ -16,6 +16,8 @@ import TextReveal from "@/components/TextReveal";
 import IntroSequence from "@/components/IntroSequence";
 import TextMarquee from "@/components/TextMarquee";
 import DevActivity from "@/components/DevActivity";
+import ProcessSection from "@/components/ProcessSection";
+import Stats from "@/components/Stats";
 
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
@@ -51,11 +53,11 @@ export default function Home() {
       <IntroSequence onComplete={() => setIntroFinished(true)} />
 
       {/* Global Noise Background */}
-      <div className="noise-bg mix-blend-overlay"></div>
+      <div className="noise-bg opacity-[0.15]"></div>
 
       {/* Global Scroll Progress */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-teal origin-left z-50 mix-blend-difference"
+        className="fixed top-0 left-0 right-0 h-1 bg-teal origin-left z-50 shadow-[0_0_10px_rgba(94,201,168,0.5)]"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -318,10 +320,9 @@ export default function Home() {
       {/* 05 - UNDER THE HOOD */}
       <CodeShowcase />
 
-      {/* 05.5 - THE LAB */}
-
-
-      {/* 06 - EXPERIENCE TIMELINE */}
+      {/* 05.5 - THE LAB / PROCESS & STATS */}
+      <ProcessSection />
+      <Stats />      {/* 06 - EXPERIENCE TIMELINE */}
       <Timeline />
 
       {/* 06.5 - DEV ACTIVITY */}

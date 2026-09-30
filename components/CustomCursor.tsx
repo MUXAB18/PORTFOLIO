@@ -69,14 +69,14 @@ export default function CustomCursor() {
       />
 
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
         style={{
           x: smoothX,
           y: smoothY,
         }}
         animate={{
-          width: cursorState === "project" ? 140 : cursorState === "hover" ? 48 : 12,
-          height: cursorState === "project" ? 140 : cursorState === "hover" ? 48 : 12,
+          width: cursorState === "project" ? 80 : cursorState === "hover" ? 48 : 12,
+          height: cursorState === "project" ? 80 : cursorState === "hover" ? 48 : 12,
           translateX: "-50%",
           translateY: "-50%",
         }}
@@ -85,8 +85,8 @@ export default function CustomCursor() {
         <motion.div
           className="absolute inset-0 rounded-full"
           animate={{
-            backgroundColor: cursorState === "project" ? "#5EC9A8" : cursorState === "hover" ? "transparent" : "#5EC9A8",
-            border: cursorState === "hover" ? "1px solid #5EC9A8" : "0px solid transparent",
+            backgroundColor: cursorState === "hover" || cursorState === "project" ? "transparent" : "#5EC9A8",
+            border: cursorState === "hover" || cursorState === "project" ? "1px solid #5EC9A8" : "0px solid transparent",
           }}
           transition={{ duration: 0.2 }}
         />
@@ -96,9 +96,9 @@ export default function CustomCursor() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            className="font-sans font-bold text-xs text-[#1A1D29] tracking-widest text-center"
+            className="font-sans font-bold text-[10px] text-[#5EC9A8] tracking-widest text-center"
           >
-            VIEW<br />CASE STUDY ↗
+            VIEW
           </motion.span>
         )}
       </AnimatePresence>
