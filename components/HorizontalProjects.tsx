@@ -34,7 +34,7 @@ export default function HorizontalProjects() {
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         
         {/* Background Decorative */}
-        <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none mix-blend-screen"></div>
+        <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none "></div>
         <div className="absolute top-10 left-10 md:top-20 md:left-24 z-10">
           <span className="font-sans font-bold text-sm tracking-widest text-teal uppercase block">Selected Work</span>
         </div>

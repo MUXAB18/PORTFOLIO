@@ -77,7 +77,7 @@ export default function SkillsConstellation() {
           ))}
           
           <motion.div 
-            className="absolute left-1/2 top-1/2 w-8 h-8 bg-white rounded-full mix-blend-screen pointer-events-none blur-sm"
+            className="absolute left-1/2 top-1/2 w-8 h-8 bg-white rounded-full  pointer-events-none blur-sm"
             animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
             transition={{ repeat: Infinity, duration: 2 }}
             style={{ x: "-50%", y: "-50%" }}

@@ -23,7 +23,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-32 px-6 md:px-16 lg:px-24 bg-navy relative overflow-hidden">
-      <div className="absolute inset-0 dot-grid-dense opacity-30 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute inset-0 dot-grid-dense opacity-30  pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 

@@ -97,7 +97,7 @@ export default function TechStack3D() {
     <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-navy relative overflow-hidden flex flex-col lg:flex-row items-center justify-between">
 
       {/* Background Decor */}
-      <div className="absolute inset-0 dot-grid-teal opacity-5 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute inset-0 dot-grid-teal opacity-5  pointer-events-none"></div>
 
       {/* Text Content Side */}
       <div className="w-full lg:w-1/2 relative z-10 mb-24 lg:mb-0 text-center lg:text-left flex flex-col items-center lg:items-start">

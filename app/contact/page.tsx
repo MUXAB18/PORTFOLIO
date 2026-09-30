@@ -40,7 +40,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-[#1A1D29] relative overflow-hidden flex flex-col justify-center pt-32 pb-12 px-6">
       {/* Background Effects */}
-      <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none mix-blend-screen"></div>
+      <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none "></div>
       <div className="absolute top-0 right-0 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-teal/10 rounded-full blur-[100px] md:blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
       <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3"></div>
 

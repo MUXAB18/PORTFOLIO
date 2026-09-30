@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <section id="contact" className="pt-32 pb-8 px-6 md:px-16 lg:px-24 bg-navy-light relative overflow-hidden">
       {/* Background Dots */}
-      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none mix-blend-screen"></div>
+      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none "></div>
 
       {/* Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal/5 rounded-full blur-[100px] pointer-events-none"></div>

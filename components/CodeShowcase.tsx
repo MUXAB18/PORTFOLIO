@@ -33,7 +33,7 @@ export function useWebSocketBatch<T>(url: string, batchSize = 50) {
 
   return (
     <section className="py-32 px-6 md:px-16 lg:px-24 bg-navy-light relative overflow-hidden">
-      <div className="absolute inset-0 dot-grid-teal opacity-10 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute inset-0 dot-grid-teal opacity-10  pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16 relative z-10">
 

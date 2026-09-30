@@ -55,18 +55,7 @@ export default function CustomCursor() {
   return (
     <>
       {/* Subtle radial light that follows the cursor */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[0] hidden md:block"
-        style={{
-          width: 800,
-          height: 800,
-          x: smoothX,
-          y: smoothY,
-          translateX: "-50%",
-          translateY: "-50%",
-          background: "radial-gradient(circle, rgba(94, 201, 168, 0.05) 0%, transparent 60%)",
-        }}
-      />
+      {/* Removed the heavy 800x800 radial-gradient tracking layer to fix Chrome rendering lag */}
 
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center"

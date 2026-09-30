@@ -40,7 +40,7 @@ const BigCounter = ({ end, label, suffix = "" }: { end: number, label: string, s
 export default function Stats() {
   return (
     <section className="py-32 px-6 md:px-16 lg:px-24 bg-[#151722] relative overflow-hidden flex flex-col items-center justify-center min-h-[60vh]">
-      <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none mix-blend-screen"></div>
+      <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none "></div>
       
       {/* Decorative floating elements */}
       <motion.div 
