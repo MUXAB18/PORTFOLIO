@@ -6,12 +6,15 @@ import Navbar from "../components/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  // Only load weights actually used in the design (drop 100/200/300 and all italics)
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
   variable: "--font-poppins"
 });
 
 const caveat = Caveat({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-caveat"
 });
 
