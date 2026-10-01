@@ -46,11 +46,20 @@ export default function IntroSequence({ onComplete }: { onComplete: () => void }
             className="absolute -inset-20 bg-teal/5 rounded-full blur-3xl pointer-events-none transform-gpu will-change-transform"
           />
 
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes introFade {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            .lcp-fade {
+              animation: introFade 0.6s ease-out 0.2s both;
+            }
+          `}} />
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 10 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center lcp-fade"
           >
             <span className="font-sans font-black text-white text-sm md:text-base tracking-[0.4em] uppercase mb-4 z-10">
               Musab Iftikhar

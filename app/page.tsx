@@ -4,19 +4,21 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
 import { Mail } from "lucide-react";
-import Timeline from "@/components/Timeline";
-import Contact from "@/components/Contact";
-import PortfolioSection from "@/components/PortfolioSection";
-import ProfessionalSkills from "@/components/ProfessionalSkills";
-import TechStack3D from "@/components/TechStack3D";
-import CodeShowcase from "@/components/CodeShowcase";
-import DesignToCode from "@/components/DesignToCode";
+import dynamic from "next/dynamic";
 import TextReveal from "@/components/TextReveal";
 import IntroSequence from "@/components/IntroSequence";
-import TextMarquee from "@/components/TextMarquee";
-import DevActivity from "@/components/DevActivity";
-import ProcessSection from "@/components/ProcessSection";
-import Stats from "@/components/Stats";
+
+const Timeline = dynamic(() => import("@/components/Timeline"));
+const Contact = dynamic(() => import("@/components/Contact"));
+const PortfolioSection = dynamic(() => import("@/components/PortfolioSection"));
+const ProfessionalSkills = dynamic(() => import("@/components/ProfessionalSkills"));
+const TechStack3D = dynamic(() => import("@/components/TechStack3D"));
+const CodeShowcase = dynamic(() => import("@/components/CodeShowcase"));
+const DesignToCode = dynamic(() => import("@/components/DesignToCode"));
+const TextMarquee = dynamic(() => import("@/components/TextMarquee"));
+const DevActivity = dynamic(() => import("@/components/DevActivity"));
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const Stats = dynamic(() => import("@/components/Stats"));
 
 // Caveat font is loaded globally via layout.tsx; use the CSS variable directly
 const caveatClass = "font-script";
