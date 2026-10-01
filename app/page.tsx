@@ -259,6 +259,7 @@ export default function Home() {
                 src="/musab.jpg"
                 alt="Musab Iftikhar"
                 fill
+                sizes="(max-width: 768px) 280px, (max-width: 1024px) 380px, 420px"
                 className="object-cover rounded-full object-top shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
                 priority
               />

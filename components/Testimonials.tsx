@@ -60,7 +60,7 @@ export default function Testimonials() {
 
               <div className="flex items-center gap-4 relative z-10 border-t border-white/10 pt-8">
                 <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-teal/30 group-hover:border-teal transition-colors duration-300">
-                  <Image src={test.avatar} alt={test.name} fill className="object-cover" />
+                  <Image src={test.avatar} alt={test.name} fill sizes="56px" className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-sans font-bold text-white tracking-wide">{test.name}</h4>
