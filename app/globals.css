@@ -100,6 +100,16 @@
   100% { transform: translateX(150%) skewX(-20deg); }
 }
 
+/* Float animations for Stats decorative blobs — CSS-only, no JS overhead */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(30px) rotate(-10deg); }
+}
+
 /* ── Cinematic Effects ── */
 .noise-bg {
   position: absolute;
