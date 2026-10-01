@@ -49,13 +49,26 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const rectCache = useRef<{ width: number; height: number; left: number; top: number } | null>(null);
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    rectCache.current = {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left,
+      top: rect.top,
+    };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!rectCache.current) return;
+    const { width, height, left, top } = rectCache.current;
+    
+    // Calculate mouse position relative to the cached rect
+    const mouseX = e.clientX - left;
+    const mouseY = e.clientY - top;
 
     // Convert to normalized coordinates (-0.5 to 0.5)
     x.set(mouseX / width - 0.5);
@@ -63,6 +76,7 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
   };
 
   const handleMouseLeave = () => {
+    rectCache.current = null;
     // Reset to center
     x.set(0);
     y.set(0);
@@ -78,6 +92,7 @@ function SkillCard({ skill, index }: { skill: any, index: number }) {
     >
       <motion.div
         ref={ref}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
