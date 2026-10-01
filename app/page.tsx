@@ -256,7 +256,7 @@ export default function Home() {
               className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] z-10"
             >
               <Image
-                src="/musab.jpg"
+                src="/musab-new.jpg"
                 alt="Musab Iftikhar"
                 fill
                 sizes="(max-width: 768px) 280px, (max-width: 1024px) 380px, 420px"
