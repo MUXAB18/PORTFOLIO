@@ -24,30 +24,38 @@ interface ParallaxProps {
 
 function ParallaxText({ children, baseVelocity = 100, isVisible }: ParallaxProps) {
   const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400
-  });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
-  });
-
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  
   const directionFactor = useRef<number>(1);
+  const lastScrollY = useRef(0);
+  const smoothVelocity = useRef(0);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+  }, []);
 
   useAnimationFrame((t, delta) => {
     // Skip CPU work when marquee is off-screen
     if (!isVisible.current) return;
 
+    // Native scroll velocity calculation with Lerp (zero hook overhead)
+    const currentScrollY = window.scrollY;
+    const rawVelocity = currentScrollY - lastScrollY.current;
+    lastScrollY.current = currentScrollY;
+    
+    // Smooth the velocity
+    smoothVelocity.current = smoothVelocity.current * 0.9 + rawVelocity * 0.1;
+    const velocityFactor = smoothVelocity.current * 0.1; // Scale factor
+
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-    if (velocityFactor.get() < 0) {
+    
+    if (velocityFactor < 0) {
       directionFactor.current = -1;
-    } else if (velocityFactor.get() > 0) {
+    } else if (velocityFactor > 0) {
       directionFactor.current = 1;
     }
-    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+    
+    moveBy += directionFactor.current * moveBy * Math.abs(velocityFactor);
     baseX.set(baseX.get() + moveBy);
   });
 
