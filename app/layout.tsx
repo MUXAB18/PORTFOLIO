@@ -4,6 +4,8 @@ import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import Navbar from "../components/Navbar";
 
+import FPSMonitor from "@/components/FPSMonitor";
+
 const poppins = Poppins({
   subsets: ["latin"],
   // Only load weights actually used in the design (drop 100/200/300 and all italics)
@@ -60,6 +62,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${caveat.variable} font-sans antialiased bg-[#1A1D29] text-white overflow-x-hidden selection:bg-[#5EC9A8] selection:text-[#1A1D29]`}>
 
         <CustomCursor />
+        <FPSMonitor />
         <Navbar />
         {children}
       </body>
