@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 const TECH_STACK = [
@@ -12,36 +12,52 @@ const TECH_STACK = [
 
 export default function TechStack3D() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [items, setItems] = useState<any[]>([]);
   const animationRef = useRef<number>(0);
   const rotationRef = useRef({ x: 0, y: 0 });
-  const mouseRef = useRef({ x: 0.005, y: 0.005 }); // initial auto-rotation speed
+  // Initial auto-rotation speed
+  const mouseRef = useRef({ x: 0.005, y: 0.005 });
+  // Ref to each span element for direct DOM updates (avoids React re-renders)
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Stable 3D coordinates computed once
+  const origCoordsRef = useRef<{ x: number; y: number; z: number }[]>([]);
+  // Intersection observer flag — stop RAF when off-screen
+  const isVisibleRef = useRef(false);
 
   useEffect(() => {
-    // Generate initial sphere points using Fibonacci sphere algorithm
     const N = TECH_STACK.length;
-    // Dynamic radius based on screen size to prevent mobile overflow
     const r = window.innerWidth < 768 ? 140 : 200;
 
-    const initialItems = TECH_STACK.map((tech, i) => {
+    // Compute initial sphere points once (Fibonacci sphere)
+    origCoordsRef.current = TECH_STACK.map((_, i) => {
       const phi = Math.acos(-1 + (2 * i) / N);
       const theta = Math.sqrt(N * Math.PI) * phi;
-
       return {
-        text: tech,
         x: r * Math.cos(theta) * Math.sin(phi),
         y: r * Math.sin(theta) * Math.sin(phi),
         z: r * Math.cos(phi),
-        origX: r * Math.cos(theta) * Math.sin(phi),
-        origY: r * Math.sin(theta) * Math.sin(phi),
-        origZ: r * Math.cos(phi),
       };
     });
 
-    setItems(initialItems);
+    // Pause animation when section is off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.05 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
 
-    // Animation Loop
+    // Pause when tab is hidden
+    const handleVisibility = () => {
+      isVisibleRef.current = document.visibilityState === "visible";
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    const isMobile = window.innerWidth < 768;
+    const fontSize = isMobile ? "0.85rem" : "1.25rem";
+
     const animate = () => {
+      animationRef.current = requestAnimationFrame(animate);
+      if (!isVisibleRef.current) return; // Skip work when off-screen
+
       rotationRef.current.x += mouseRef.current.y;
       rotationRef.current.y += mouseRef.current.x;
 
@@ -50,46 +66,51 @@ export default function TechStack3D() {
       const sy = Math.sin(rotationRef.current.y);
       const cy = Math.cos(rotationRef.current.y);
 
-      setItems((prev) =>
-        prev.map((item) => {
-          // Rotate around X axis
-          const y1 = item.origY * cx - item.origZ * sx;
-          const z1 = item.origY * sx + item.origZ * cx;
+      origCoordsRef.current.forEach((orig, idx) => {
+        const el = itemRefs.current[idx];
+        if (!el) return;
 
-          // Rotate around Y axis
-          const x2 = item.origX * cy + z1 * sy;
-          const z2 = -item.origX * sy + z1 * cy;
+        // Rotate around X axis
+        const y1 = orig.y * cx - orig.z * sx;
+        const z1 = orig.y * sx + orig.z * cx;
+        // Rotate around Y axis
+        const x2 = orig.x * cy + z1 * sy;
+        const z2 = -orig.x * sy + z1 * cy;
 
-          return { ...item, x: x2, y: y1, z: z2 };
-        })
-      );
+        const scale = (z2 + 300) / 400;
+        const opacity = Math.max(0.1, (z2 + 200) / 400);
+        const zIndex = Math.round(z2 + 200);
+        const color = z2 > 0 ? "#ffffff" : "#888888";
+        const textShadow = z2 > 50 ? "0 0 20px rgba(94,201,168,0.4)" : "none";
 
-      animationRef.current = requestAnimationFrame(animate);
+        // Direct DOM mutation — zero React re-renders
+        el.style.transform = `translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
+        el.style.opacity = String(opacity);
+        el.style.zIndex = String(zIndex);
+        el.style.color = color;
+        el.style.textShadow = textShadow;
+        el.style.fontSize = fontSize;
+      });
     };
 
     animate();
 
     return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(animationRef.current);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    // Calculate mouse position relative to center of container (-1 to 1)
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-
-    // Smoothly update rotation speed based on mouse position
-    mouseRef.current = {
-      x: x * 0.02, // max rotation speed
-      y: y * 0.02
-    };
+    mouseRef.current = { x: x * 0.02, y: y * 0.02 };
   };
 
   const handleMouseLeave = () => {
-    // Return to slow auto-rotation
     mouseRef.current = { x: 0.005, y: 0.005 };
   };
 
@@ -120,7 +141,7 @@ export default function TechStack3D() {
           <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-3">
             <span className="px-4 py-2 rounded-full border border-teal/30 text-teal text-[10px] md:text-xs font-bold tracking-widest uppercase bg-teal/5">Frontend</span>
             <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Backend</span>
-            <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Cloud & DevOps</span>
+            <span className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-[10px] md:text-xs font-bold tracking-widest uppercase bg-white/5">Cloud &amp; DevOps</span>
           </div>
         </motion.div>
       </div>
@@ -140,29 +161,21 @@ export default function TechStack3D() {
           {/* Glowing orb behind the sphere */}
           <div className="absolute inset-0 bg-teal/10 rounded-full blur-[80px] md:blur-[100px] scale-75 group-hover:bg-teal/20 transition-colors duration-500 pointer-events-none"></div>
 
-          {items.map((item, idx) => {
-            // Calculate scale and opacity based on Z depth to create 3D illusion
-            const scale = (item.z + 300) / 400; // Normalized between ~0.5 and 1.5
-            const opacity = (item.z + 200) / 400; // Fade out items in the back
-            const zIndex = Math.round(item.z + 200);
-
-            return (
-              <div
-                key={idx}
-                className="absolute font-sans font-bold whitespace-nowrap transition-colors duration-300 hover:text-teal hover:!opacity-100"
-                style={{
-                  transform: `translate3d(${item.x}px, ${item.y}px, ${item.z}px) scale(${scale})`,
-                  opacity: Math.max(0.1, opacity), // don't go fully invisible
-                  zIndex: zIndex,
-                  color: item.z > 0 ? '#ffffff' : '#888888',
-                  textShadow: item.z > 50 ? '0 0 20px rgba(94,201,168,0.4)' : 'none',
-                  fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '0.85rem' : '1.25rem'
-                }}
-              >
-                {item.text}
-              </div>
-            );
-          })}
+          {/* Render all items statically — RAF updates their styles directly */}
+          {TECH_STACK.map((tech, idx) => (
+            <div
+              key={idx}
+              ref={(el) => { itemRefs.current[idx] = el; }}
+              className="absolute font-sans font-bold whitespace-nowrap transition-colors duration-300 hover:text-teal hover:!opacity-100"
+              style={{
+                // Initial invisible state before first RAF frame
+                opacity: 0,
+                willChange: "transform, opacity",
+              }}
+            >
+              {tech}
+            </div>
+          ))}
         </motion.div>
       </div>
 
