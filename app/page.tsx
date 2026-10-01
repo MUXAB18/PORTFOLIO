@@ -212,7 +212,6 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              style={{ x: blobX, y: blobY }}
               className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] bg-teal/5 rounded-full blur-2xl"
             ></motion.div>
 

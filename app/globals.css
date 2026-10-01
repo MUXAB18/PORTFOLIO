@@ -36,6 +36,12 @@
   }
 }
 
+@media (pointer: fine) {
+  body, a, button, input, textarea, select {
+    cursor: none !important;
+  }
+}
+
 /* ── Custom Selection ── */
 ::selection {
   background-color: var(--color-teal);

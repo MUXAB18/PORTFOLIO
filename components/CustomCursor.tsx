@@ -9,7 +9,7 @@ export default function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const springConfig = { damping: 20, stiffness: 600, mass: 0.1 };
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
 
@@ -17,9 +17,14 @@ export default function CustomCursor() {
     // Only run on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    // Use requestAnimationFrame to throttle cursor updates and eliminate React event lag
+    let rafId: number;
     const updateMousePosition = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        cursorX.set(e.clientX);
+        cursorY.set(e.clientY);
+      });
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -27,7 +32,7 @@ export default function CustomCursor() {
 
       const projectHover = target.closest('[data-cursor="project"]');
       if (projectHover) {
-        setCursorState("project");
+        setCursorState(prev => prev !== "project" ? "project" : prev);
         return;
       }
 
@@ -37,45 +42,47 @@ export default function CustomCursor() {
         target.closest("a") ||
         target.closest("button")
       ) {
-        setCursorState("hover");
+        setCursorState(prev => prev !== "hover" ? "hover" : prev);
       } else {
-        setCursorState("default");
+        setCursorState(prev => prev !== "default" ? "default" : prev);
       }
     };
 
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("mouseover", handleMouseOver);
+    // Use passive listeners
+    window.addEventListener("mousemove", updateMousePosition, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
+  // Compute scale based on state
+  const scale = cursorState === "project" ? 6.66 : cursorState === "hover" ? 4 : 1;
+
   return (
     <>
-      {/* Subtle radial light that follows the cursor */}
-      {/* Removed the heavy 800x800 radial-gradient tracking layer to fix Chrome rendering lag */}
-
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center w-3 h-3"
         style={{
           x: smoothX,
           y: smoothY,
         }}
         animate={{
-          width: cursorState === "project" ? 80 : cursorState === "hover" ? 48 : 12,
-          height: cursorState === "project" ? 80 : cursorState === "hover" ? 48 : 12,
+          scale: scale,
           translateX: "-50%",
           translateY: "-50%",
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
         <motion.div
           className="absolute inset-0 rounded-full"
           animate={{
             backgroundColor: cursorState === "hover" || cursorState === "project" ? "transparent" : "#5EC9A8",
             border: cursorState === "hover" || cursorState === "project" ? "1px solid #5EC9A8" : "0px solid transparent",
+            borderWidth: cursorState === "hover" || cursorState === "project" ? (1 / scale) + "px" : "0px"
           }}
           transition={{ duration: 0.2 }}
         />
