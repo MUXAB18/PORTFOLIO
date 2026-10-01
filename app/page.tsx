@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
-import { Caveat } from "next/font/google";
 import { Mail } from "lucide-react";
 import Timeline from "@/components/Timeline";
 import Contact from "@/components/Contact";
@@ -19,7 +18,8 @@ import DevActivity from "@/components/DevActivity";
 import ProcessSection from "@/components/ProcessSection";
 import Stats from "@/components/Stats";
 
-const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
+// Caveat font is loaded globally via layout.tsx; use the CSS variable directly
+const caveatClass = "font-script";
 
 export default function Home() {
   const mouseX = useMotionValue(0);
@@ -129,7 +129,7 @@ export default function Home() {
               className="flex items-center gap-4 mb-6"
             >
               <span className="font-sans font-bold text-xs tracking-widest text-white/40 uppercase">I AM</span>
-              <span className={`${caveat.className} text-4xl md:text-5xl text-white`}>Full Stack Software Engineer</span>
+              <span className={`${caveatClass} text-4xl md:text-5xl text-white`}>Full Stack Software Engineer</span>
             </motion.div>
 
             <motion.p
@@ -312,7 +312,7 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 1 }}
             className="mt-12 absolute right-0 bottom-32 md:right-24 md:bottom-32 rotate-[-10deg]"
           >
-            <span className={`${caveat.className} text-2xl md:text-4xl text-amber`}>
+            <span className={`${caveatClass} text-2xl md:text-4xl text-amber`}>
               "details matter."
             </span>
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" className="absolute -left-8 top-4 stroke-amber">

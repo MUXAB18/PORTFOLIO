@@ -2,10 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Caveat } from "next/font/google";
 import TextReveal from "@/components/TextReveal";
-
-const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 import { projects } from "@/data/projects";
 
@@ -29,7 +26,7 @@ export default function PortfolioSection() {
             className="flex items-center justify-center gap-3 mt-2 relative z-10"
           >
             <span className="font-sans font-bold text-sm tracking-widest text-teal uppercase bg-teal/10 px-4 py-1.5 rounded-full border border-teal/20">MY</span>
-            <span className={`${caveat.className} text-4xl text-white/90`}>projects</span>
+            <span className="font-script text-4xl text-white/90">projects</span>
           </motion.div>
         </div>
 

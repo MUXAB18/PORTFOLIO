@@ -1,10 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Caveat } from "next/font/google";
 import { useRef } from "react";
-
-const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 const skills = [
   {
@@ -155,7 +152,7 @@ export default function ProfessionalSkills() {
             className="flex items-center gap-3 mt-4"
           >
             <span className="font-sans font-bold text-xs tracking-widest text-teal uppercase">MY</span>
-            <span className={`${caveat.className} text-4xl text-teal`}>Expertise</span>
+            <span className="font-script text-4xl text-teal">Expertise</span>
           </motion.div>
         </div>
 

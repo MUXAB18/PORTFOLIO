@@ -1,10 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Caveat } from "next/font/google";
 import TextReveal from "@/components/TextReveal";
-
-const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 const activityData = [
   { label: "Contributions (Last Year)", value: "1,240+", color: "text-teal" },
@@ -30,7 +27,7 @@ export default function DevActivity() {
             className="flex items-center justify-center gap-3 mt-4 absolute top-1/2 -translate-y-1/2"
           >
             <span className="font-sans font-bold text-sm tracking-widest text-teal uppercase">DEV</span>
-            <span className={`${caveat.className} text-4xl text-white`}>dashboard</span>
+            <span className="font-script text-4xl text-white">dashboard</span>
           </motion.div>
         </div>
 

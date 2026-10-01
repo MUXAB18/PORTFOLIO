@@ -2,9 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Caveat } from "next/font/google";
-
-const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 const TIMELINE_DATA = [
   {
@@ -118,7 +115,7 @@ export default function Timeline() {
                       <h3 className="font-sans font-black text-2xl md:text-3xl text-white leading-tight tracking-wide mb-1">
                         {exp.role}
                       </h3>
-                      <h4 className={`${caveat.className} text-3xl md:text-4xl text-white/60`}>
+                      <h4 className="font-script text-3xl md:text-4xl text-white/60">
                         {exp.company}
                       </h4>
                     </div>
