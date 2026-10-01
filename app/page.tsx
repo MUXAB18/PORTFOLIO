@@ -252,14 +252,14 @@ export default function Home() {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-              className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] z-10"
+              className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] z-10 overflow-hidden rounded-full shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
             >
               <Image
                 src="/musab-new.jpg"
                 alt="Musab Iftikhar"
                 fill
                 sizes="(max-width: 768px) 280px, (max-width: 1024px) 380px, 420px"
-                className="object-cover rounded-full object-center shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+                className="object-cover object-center scale-[1.12]"
                 priority
               />
             </motion.div>
