@@ -4,21 +4,19 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
 import { Mail } from "lucide-react";
-import dynamic from "next/dynamic";
+import Timeline from "@/components/Timeline";
+import Contact from "@/components/Contact";
+import PortfolioSection from "@/components/PortfolioSection";
+import ProfessionalSkills from "@/components/ProfessionalSkills";
+import TechStack3D from "@/components/TechStack3D";
+import CodeShowcase from "@/components/CodeShowcase";
+import DesignToCode from "@/components/DesignToCode";
 import TextReveal from "@/components/TextReveal";
 import IntroSequence from "@/components/IntroSequence";
-
-const Timeline = dynamic(() => import("@/components/Timeline"));
-const Contact = dynamic(() => import("@/components/Contact"));
-const PortfolioSection = dynamic(() => import("@/components/PortfolioSection"));
-const ProfessionalSkills = dynamic(() => import("@/components/ProfessionalSkills"));
-const TechStack3D = dynamic(() => import("@/components/TechStack3D"));
-const CodeShowcase = dynamic(() => import("@/components/CodeShowcase"));
-const DesignToCode = dynamic(() => import("@/components/DesignToCode"));
-const TextMarquee = dynamic(() => import("@/components/TextMarquee"));
-const DevActivity = dynamic(() => import("@/components/DevActivity"));
-const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
-const Stats = dynamic(() => import("@/components/Stats"));
+import TextMarquee from "@/components/TextMarquee";
+import DevActivity from "@/components/DevActivity";
+import ProcessSection from "@/components/ProcessSection";
+import Stats from "@/components/Stats";
 
 // Caveat font is loaded globally via layout.tsx; use the CSS variable directly
 const caveatClass = "font-script";
@@ -93,8 +91,8 @@ export default function Home() {
           {/* Left Column: Typography & CTAs */}
           <div className="flex flex-col items-start pt-10 lg:pt-0">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 30 }}
+              animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-col"
             >
@@ -104,8 +102,8 @@ export default function Home() {
             <div className="flex flex-col mb-6">
               <div className="overflow-hidden">
                 <motion.h1
-                  initial={{ opacity: 0, y: 100, filter: "blur(10px)" }}
-                  animate={introFinished ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+                  initial={{ y: 100 }}
+                  animate={introFinished ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
                   transition={{ duration: 1, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
                   className="font-sans font-black text-[13vw] sm:text-[10vw] md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter text-teal origin-bottom pr-6"
                 >
@@ -114,8 +112,8 @@ export default function Home() {
               </div>
               <div className="overflow-hidden">
                 <motion.h1
-                  initial={{ opacity: 0, y: 100, filter: "blur(10px)" }}
-                  animate={introFinished ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+                  initial={{ y: 100 }}
+                  animate={introFinished ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
                   transition={{ duration: 1, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
                   className="font-sans font-black text-[13vw] sm:text-[10vw] md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter text-white origin-bottom pr-6"
                 >
@@ -125,8 +123,8 @@ export default function Home() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ x: -20 }}
+              animate={introFinished ? { opacity: 1, x: 0 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex items-center gap-4 mb-6"
             >
@@ -135,8 +133,8 @@ export default function Home() {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 1 }}
+              animate={introFinished ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="font-sans text-white/70 max-w-md text-base md:text-lg leading-relaxed mb-8"
             >
@@ -145,8 +143,8 @@ export default function Home() {
 
             {/* Social Links */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex gap-4 mb-10"
             >
@@ -188,8 +186,8 @@ export default function Home() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
               className="flex flex-wrap items-center gap-4 mt-2"
             >
@@ -211,16 +209,16 @@ export default function Home() {
           <div className="relative h-[400px] md:h-[450px] lg:h-[550px] w-full flex items-center justify-center pointer-events-none mt-12 lg:mt-0">
             {/* The main circular background blob */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ scale: 0.8 }}
+              animate={introFinished ? { opacity: 1, scale: 1 } : { opacity: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] bg-teal/5 rounded-full blur-2xl transform-gpu will-change-transform"
             ></motion.div>
 
             {/* Sharp Mint Outline */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -45 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              initial={{ scale: 0.8, rotate: -45 }}
+              animate={introFinished ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               style={{ x: outlineX, y: outlineY }}
               className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[450px] lg:h-[450px] rounded-full border border-teal/20"
@@ -228,8 +226,8 @@ export default function Home() {
 
             {/* Floating Pills */}
             <motion.div
-              initial={{ opacity: 0, x: 50, y: 50 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
+              initial={{ x: 50, y: 50 }}
+              animate={introFinished ? { opacity: 1, x: 0, y: 0 } : { opacity: 0 }}
               transition={{ duration: 0.8, delay: 0.8, type: "spring" }}
               style={{ x: pill1X, y: pill1Y }}
               className="absolute top-[10%] right-0 md:-right-10 z-20 bg-navy-light border border-white/5 rounded-xl px-6 py-4 shadow-2xl flex flex-col items-center"
@@ -239,8 +237,8 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: -50, y: -50 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
+              initial={{ x: -50, y: -50 }}
+              animate={introFinished ? { opacity: 1, x: 0, y: 0 } : { opacity: 0 }}
               transition={{ duration: 0.8, delay: 1, type: "spring" }}
               style={{ x: pill2X, y: pill2Y }}
               className="absolute bottom-[20%] left-0 md:-left-10 z-20 bg-navy-light border border-white/5 rounded-xl px-6 py-4 shadow-2xl flex flex-col items-center"
@@ -251,8 +249,8 @@ export default function Home() {
 
             {/* The Portrait Image */}
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 100 }}
+              animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
               className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] z-10 overflow-hidden rounded-full shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
             >
