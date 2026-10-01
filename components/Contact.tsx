@@ -11,7 +11,7 @@ export default function Contact() {
       <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none "></div>
 
       {/* Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal/5 rounded-full blur-[100px] pointer-events-none transform-gpu will-change-transform"></div>
 
       <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center text-center">
 

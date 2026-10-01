@@ -14,7 +14,7 @@ export default function PortfolioSection() {
         {/* Title */}
         <div className="flex flex-col items-center mb-20 relative">
           {/* Premium Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] h-[150px] bg-teal/10 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] h-[150px] bg-teal/10 blur-[100px] rounded-full pointer-events-none transform-gpu will-change-transform" />
           
           <TextReveal
             text="PORTFOLIO"

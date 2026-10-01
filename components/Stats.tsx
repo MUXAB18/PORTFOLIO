@@ -77,11 +77,11 @@ export default function Stats() {
 
       {/* Decorative floating elements — reduced to CSS animation (no framer-motion RAF overhead) */}
       <div
-        className="absolute top-20 left-20 w-32 h-32 rounded-full bg-teal/5 blur-3xl pointer-events-none animate-[float1_6s_ease-in-out_infinite]"
+        className="absolute top-20 left-20 w-32 h-32 rounded-full bg-teal/5 blur-3xl pointer-events-none animate-[float1_6s_ease-in-out_infinite] transform-gpu will-change-transform"
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-amber/5 blur-3xl pointer-events-none animate-[float2_8s_ease-in-out_infinite]"
+        className="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-amber/5 blur-3xl pointer-events-none animate-[float2_8s_ease-in-out_infinite] transform-gpu will-change-transform"
         aria-hidden="true"
       />
 

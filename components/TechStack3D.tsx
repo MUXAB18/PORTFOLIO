@@ -159,7 +159,7 @@ export default function TechStack3D() {
           className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[500px] md:h-[500px] flex items-center justify-center cursor-crosshair group"
         >
           {/* Glowing orb behind the sphere */}
-          <div className="absolute inset-0 bg-teal/10 rounded-full blur-[80px] md:blur-[100px] scale-75 group-hover:bg-teal/20 transition-colors duration-500 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-teal/10 rounded-full blur-[80px] md:blur-[100px] scale-75 group-hover:bg-teal/20 transition-colors duration-500 pointer-events-none transform-gpu will-change-transform"></div>
 
           {/* Render all items statically — RAF updates their styles directly */}
           {TECH_STACK.map((tech, idx) => (

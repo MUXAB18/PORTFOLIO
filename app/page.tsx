@@ -212,7 +212,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] bg-teal/5 rounded-full blur-2xl"
+              className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] bg-teal/5 rounded-full blur-2xl transform-gpu will-change-transform"
             ></motion.div>
 
             {/* Sharp Mint Outline */}

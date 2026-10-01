@@ -43,7 +43,7 @@ export default function IntroSequence({ onComplete }: { onComplete: () => void }
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 0.3, scale: 1.2 }}
             transition={{ duration: 2, ease: "easeOut" }}
-            className="absolute -inset-20 bg-teal/5 rounded-full blur-3xl pointer-events-none"
+            className="absolute -inset-20 bg-teal/5 rounded-full blur-3xl pointer-events-none transform-gpu will-change-transform"
           />
 
           <motion.div

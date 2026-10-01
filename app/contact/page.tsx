@@ -41,8 +41,8 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[#1A1D29] relative overflow-hidden flex flex-col justify-center pt-32 pb-12 px-6">
       {/* Background Effects */}
       <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none "></div>
-      <div className="absolute top-0 right-0 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-teal/10 rounded-full blur-[100px] md:blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3"></div>
+      <div className="absolute top-0 right-0 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-teal/10 rounded-full blur-[100px] md:blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3 transform-gpu will-change-transform"></div>
+      <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3 transform-gpu will-change-transform"></div>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
         
@@ -87,7 +87,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
           className="flex items-center"
         >
-          <div className="w-full bg-[#1A1D29]/80 border border-white/5 backdrop-blur-3xl rounded-[2.5rem] p-6 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.3)] relative overflow-hidden">
+          <div className="w-full bg-[#1A1D29]/80 border border-white/5 backdrop-blur-3xl rounded-[2.5rem] p-6 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.3)] relative overflow-hidden transform-gpu">
             {/* Form Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-teal/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
             

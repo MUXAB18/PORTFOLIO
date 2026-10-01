@@ -48,7 +48,7 @@ export default function HorizontalProjects() {
             >
               <div className="w-full h-[60%] md:h-[70%] relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/5 bg-navy-light shadow-2xl">
                 {/* Visual Layers */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal/20 rounded-full blur-[80px] group-hover:bg-teal/40 transition-colors duration-700"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal/20 rounded-full blur-[80px] group-hover:bg-teal/40 transition-colors duration-700 transform-gpu will-change-transform"></div>
                 <Image 
                   src={project.image} 
                   alt={project.title}
